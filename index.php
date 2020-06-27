@@ -1,7 +1,63 @@
+
+<?php
+if(isset($_POST['submit11'])){
+  $to = "iamkrishnadev1999@gmail.com"; // this is your Email address
+  $from = $_POST['email']; // this is the sender's Email address
+  $first_name = $_POST['fname'];
+  $last_name = $_POST['lname'];
+  $email = $_POST['email'];
+  $subject = $_POST['subject'];
+  $subject2 = "Copy of your form submission";
+  $message = "Name : " . $first_name . "\n\n" ."Last Name: ". $last_name."\n\n" ."Email Address: ". $email . "\n\n" ."Message: ". $_POST['message'];
+  $message2 = "Name : " . $first_name . "\n\n" ."Last Name: ". $last_name."\n\n" ."Email Address: ". $email . "\n\n" ."Message: ". $_POST['message'];
+  $headers = "From:" . $from;
+  $headers2 = "From:" . $to;
+  mail($to,$subject,$message,$headers);
+  mail($from,$subject2,$message2,$headers2); // sends a copy of the message to the sender
+  // echo "Mail Sent. Thank you " . $first_name . ", we will contact you shortly.";
+  // You can also use header('Location: thank_you.php'); to redirect to another page.
+  }
+
+
+$mysqlserverhost = "localhost";
+$database_name = "epiz_26102432_ascoach";
+$username_mysql = "epiz_26102432";
+$password_mysql = "UGpxVVpHxnWm4Vl";
+
+// ------------------------- Do not modify code nder this field -------------------------- //
+
+
+function sanitize($variable){
+  $clean_variable = strip_tags($variable);
+  $clean_variable = htmlentities($clean_variable, ENT_QUOTES, 'UTF-8');
+  return $clean_variable;
+}
+
+function connect_to_mysqli($mysqlserverhost, $username_mysql, $password_mysql, $database_name){
+  $connect = mysqli_connect($mysqlserverhost, $username_mysql, $password_mysql, $database_name);
+  if (!$connect) {
+      die("Connection failed mysql: " . mysqli_connect_error());
+  }
+  return $connect;  
+}
+
+if(isset($_POST["processform"])){
+  $connection = connect_to_mysqli($mysqlserverhost, $username_mysql, $password_mysql, $database_name);
+  $firstfield = mysqli_real_escape_string($connection, sanitize($_POST["firstfield"]));
+ 
+  $sql = "INSERT INTO table_form (email_id) VALUES ('$firstfield')";
+  if (mysqli_query($connection, $sql)) {} 
+    else {}
+  mysqli_close($connection);
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>LifeCoach &mdash; Website by Colorlib</title>
+    <title>ASCoach &mdash; Website by Colorlib</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -44,7 +100,8 @@
         <div class="row align-items-center">
           
           <div class="col-6 col-xl-2">
-            <h1 class="mb-0 site-logo"><a href="index.html" class="h2 mb-0">Life<span>Coach</span> <span class="text-primary">.</span> </a></h1>
+            <h1 class="mb-0 site-logo"><a href="index.php" class="h2 mb-0">AS<span>Coach</span></a></h1>
+            <!-- <h1 class="mb-0 site-logo"><a href="index.html" class="h2 mb-0">AS<span>Coach</span> <span class="text-primary">.</span> </a></h1> -->
           </div>
 
           <div class="col-12 col-md-10 d-none d-xl-block">
@@ -56,6 +113,7 @@
                 <li><a href="#training-section" class="nav-link">Our Training</a></li>
                 <li><a href="#services-section" class="nav-link">Services</a></li>
                 <li><a href="#blog-section" class="nav-link">Blog</a></li>
+                <li><a href="#tas-section" class="nav-link">TAS Support</a></li>
                 <li><a href="#contact-section" class="nav-link">Contact</a></li>
               </ul>
             </nav>
@@ -77,7 +135,7 @@
 
           <div class="col-md-6 mt-lg-5 ml-auto text-left align-self-end align-self-md-center">
             <h1>Professional Life Coaching</h1>
-            <p class="mb-4"><a href="#" class="btn btn-primary mr-2 mb-2">Get Started</a></p>
+            <p class="mb-4"><a href="#contact-section" class="btn btn-primary mr-2 mb-2">Get Started</a></p>
           </div>
             
         </div>
@@ -94,7 +152,7 @@
             <div class="mr-3"><span class="flaticon-bill display-3 text-special"></span></div>
             <div>
               <h3 class="text-white h4">50% less of every purchase</h3>
-              <p class="text-special">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p class="text-special">A step-by-step guide to break into investment</p>
               <p><a href="#">Read more</a></p>
             </div>
           </div>
@@ -102,7 +160,7 @@
             <div class="mr-3"><span class="flaticon-customer-service display-3 text-special"></span></div>
             <div>
               <h3 class="text-white h4">More programs than ever before</h3>
-              <p class="text-special">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p class="text-special">The Complete main Investment divisions</p>
               <p><a href="#">Read more</a></p>
             </div>
           </div>
@@ -118,10 +176,10 @@
             <img src="images/about_1.jpg" alt="Image" class="img-fluid rounded">
           </div>
           <div class="col-lg-6 order-md-1" data-aos="fade">
-            <h2 class="section-title mb-3">Welcome to LifeCoach</h2>
-            <p class="lead">Harum quaerat nostrum voluptatibus aspernatur eligendi accusantium cum, impedit blanditiis voluptate commodi doloribus, nemo.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio necessitatibus deserunt itaque dignissimos adipisci, tenetur.</p>
-            <p class="mb-4">Ipsum dolorum ab magnam facere alias ducimus nulla consequuntur blanditiis, maxime explicabo rerum maiores, odio.</p>
+            <h2 class="section-title mb-3">Welcome to ASCoach</h2>
+            <p class="lead">I am a Financing Coach. While I do some loan brokering, my specialty is in matching my clients with a financing resource.</p>
+            <p> making a personal recommendation for them to that resource, and then coaching my clients on how to make a presentation which will effectively sell their request.</p>
+            <p class="mb-4">The resulting partnership is a successful—and usually long-term—connection between my clients’ particular financing needs and the interests of the financing resource</p>
             <p><img src="images/signature.jpg" alt="Image" class="img-fluid w-25"></p>
           </div>
           
@@ -225,7 +283,7 @@
         <div class="row mb-5">
           <div class="col-lg-7 text-left">
             <h2 class="section-title mb-3">Meet Team</h2>
-            <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus minima neque tempora reiciendis.</p>
+            <p class="lead">We are a team because we respect, trust & care for each other. Our greatest strength is our team spirit & that will remain because a core of us come through the leagues together.</p>
           </div>
         </div>
         <div class="row">
@@ -240,10 +298,11 @@
                   <li><a href="#"><span class="icon-linkedin"></span></a></li>
                   <li><a href="#"><span class="icon-instagram"></span></a></li>
                 </ul>
-                <img src="images/person_5.jpg" alt="Image" class="img-fluid">
+                <div class="img-card2">  <img src="images/Aaksh Singh.jpg" alt="Aaksh Singh" class="img-fluid"></div>
+              
               </figure>
               <div class="p-3">
-                <h3>Kaiara Spencer</h3>
+                <h3>Aakash Singh</h3>
                 <span class="position">Expert in Motivational</span>
               </div>
             </div>
@@ -258,7 +317,9 @@
                   <li><a href="#"><span class="icon-linkedin"></span></a></li>
                   <li><a href="#"><span class="icon-instagram"></span></a></li>
                 </ul>
+                <div class="img-card2">
                 <img src="images/person_6.jpg" alt="Image" class="img-fluid">
+               </div>
               </figure>
               <div class="p-3">
                 <h3>Dave Simpson</h3>
@@ -276,7 +337,9 @@
                   <li><a href="#"><span class="icon-linkedin"></span></a></li>
                   <li><a href="#"><span class="icon-instagram"></span></a></li>
                 </ul>
+                <div class="img-card2">
                 <img src="images/person_7.jpg" alt="Image" class="img-fluid">
+               </div>
               </figure>
               <div class="p-3">
                 <h3>Ben Thompson</h3>
@@ -294,7 +357,9 @@
                   <li><a href="#"><span class="icon-linkedin"></span></a></li>
                   <li><a href="#"><span class="icon-instagram"></span></a></li>
                 </ul>
+                <div class="img-card2">
                 <img src="images/person_8.jpg" alt="Image" class="img-fluid">
+               </div>
               </figure>
               <div class="p-3">
                 <h3>Kyla Stewart</h3>
@@ -330,22 +395,22 @@
             <div class="owl-carousel slide-one-item-alt-text">
               <div>
                 <h2 class="section-title mb-3">Social Life</h2>
-                <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <p>Est qui eos quasi ratione nostrum excepturi id recusandae fugit omnis ullam pariatur itaque nisi voluptas impedit  Quo suscipit omnis iste velit maxime.</p>
+                <p class="lead">What is good social life?</p>
+                <p>Having strong relationships and love in your life Being able to manage your money Being in good health, with enough energy to get things done each day (physical well-being) Feeling engaged with where you live.</p>
 
                 <p><a href="#" class="btn btn-primary mr-2 mb-2">Learn More</a></p>
               </div>
               <div>
                 <h2 class="section-title mb-3">Money &amp; Finance</h2>
-                <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <p>Est qui eos quasi ratione nostrum excepturi id recusandae fugit omnis ullam pariatur itaque nisi voluptas impedit  Quo suscipit omnis iste velit maxime.</p>
+                <p class="lead">Importance of Money & Finance</p>
+                <p>Finance is the soul and blood of any business and no firm can survive without finance. It concerns itself with the management of monetary affairs of the firm—how money can be raised on the best terms available and how the procured money can be devoted to the best uses.</p>
 
                 <p><a href="#" class="btn btn-primary mr-2 mb-2">Learn More</a></p>
               </div>
               <div>
                 <h2 class="section-title mb-3">Motivation</h2>
-                <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <p>Est qui eos quasi ratione nostrum excepturi id recusandae fugit omnis ullam pariatur itaque nisi voluptas impedit  Quo suscipit omnis iste velit maxime.</p>
+                <p class="lead">Motivation is always internal to the person.</p>
+                <p>Human behaviour is caused by the various needs. A worker works in a factory because he needs money. Similarly, a thirsty man feels the need of water to conquer his thirst. The feeling of needs is a continuous process and the satisfaction of one need leads to the creation of a new one.</p>
 
                 <p><a href="#" class="btn btn-primary mr-2 mb-2">Learn More</a></p>
               </div>
@@ -381,7 +446,7 @@
             <div class="unit-4 d-flex">
               <div class="unit-4-icon mr-4"><span class="text-primary flaticon-bill"></span></div>
               <div>
-                <h3>Market Analysis</h3>
+                <h3>TAX  CONSULTING</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
                 <p><a href="#">Learn More</a></p>
               </div>
@@ -391,7 +456,7 @@
             <div class="unit-4 d-flex">
               <div class="unit-4-icon mr-4"><span class="text-primary flaticon-customer-service"></span></div>
               <div>
-                <h3>User Monitoring</h3>
+                <h3>IT SERVICE</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
                 <p><a href="#">Learn More</a></p>
               </div>
@@ -421,9 +486,14 @@
           </div>
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="500">
             <div class="unit-4 d-flex">
-              <div class="unit-4-icon mr-4"><span class="text-primary flaticon-award"></span></div>
+              <div class="unit-4-icon mr-4"> <img 
+                src="images/rupee.svg"
+                alt="MORTGAGE LOAN"
+                height="42"
+               style="margin: 11px 0 -2% !important;" />
+              </div>
               <div>
-                <h3>Financial Management</h3>
+                <h3>MORTGAGE LOAN</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
                 <p><a href="#">Learn More</a></p>
               </div>
@@ -433,7 +503,7 @@
         </div>
       </div>
     </section>
-
+<!-- 
     <section class="site-section testimonial-wrap" id="testimonials-section">
       <div class="container">
         <div class="row mb-5">
@@ -500,7 +570,7 @@
           </div>
 
         </div>
-    </section>
+    </section> -->
 
     
     
@@ -547,10 +617,40 @@
       </div>
     </section>
 
+
+
+    <section class="site-section bg-light" id="tas-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-12 text-center">
+            <h2 class="section-title mb-3">Our TAS Support</h2>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-lg-6 mb-6 mb-lg-6">
+            <img src="images/tas4.png" alt="Image" class="img-fluid">
+          </div>
+
+          <div class="col-md-6 col-lg-6 mb-6 mb-lg-6">
+            <img src="images/TAS2.png" alt="Image" class="img-fluid">
+            <!-- <div class="h-entry">
+              <a href="blog-single.html"><img src="images/img_1.jpg" alt="Image" class="img-fluid"></a>
+              <h2 class="font-size-regular"><a href="blog-single.html">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h2>
+              <div class="meta mb-4">Ham Brook <span class="mx-2">&bullet;</span> Jan 18, 2019<span class="mx-2">&bullet;</span> <a href="#">News</a></div>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eligendi nobis ea maiores sapiente veritatis reprehenderit suscipit quaerat rerum voluptatibus a eius.</p>
+              <p><a href="#">Continue Reading...</a></p>
+            </div>  -->
+          </div>
+
+        </div>
+      </div>
+    </section>
+
    
 
 
-    <section class="site-section bg-light" id="contact-section">
+    <section class="site-section " id="contact-section">
       <div class="container">
         <div class="row mb-5">
           <div class="col-12 text-center">
@@ -560,32 +660,33 @@
         <div class="row">
           <div class="col-md-4">
             <p class="mb-0 font-weight-bold">Address</p>
-            <p class="mb-4">203 Fake St. Mountain View, San Francisco, California, USA
+            <p class="mb-4">Shop 01, Kala Nikaten Society, Shamshan Road, Bhayandar (E)</p>
+            <!-- <p class="mb-4">203 Fake St. Mountain View, San Francisco, California, USA</p> -->
           </div>
           <div class="col-md-4">
             <p class="mb-0 font-weight-bold">Phone</p>
-            <p class="mb-4"><a href="#">+1 232 3235 324</a></p>
+            <p class="mb-4"><a href="#">+91 836 961 3417</a></p>
           </div>
           <div class="col-md-4">
             <p class="mb-0 font-weight-bold">Email Address</p>
-            <p class="mb-0"><a href="#">youremail@domain.com</a></p>
+            <p class="mb-0"><a href="#">singhaakash498@gmail.com</a></p>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12 mb-5">
 
-            <form action="#" class="p-5 bg-white">
+            <form action="" method="post" class="p-5 bg-white">
               
               <h2 class="h4 text-black mb-5">Contact Form</h2> 
 
               <div class="row form-group">
                 <div class="col-md-6 mb-3 mb-md-0">
                   <label class="text-black" for="fname">First Name</label>
-                  <input type="text" id="fname" class="form-control">
+                  <input type="text" id="fname" name="fname" class="form-control">
                 </div>
                 <div class="col-md-6">
                   <label class="text-black" for="lname">Last Name</label>
-                  <input type="text" id="lname" class="form-control">
+                  <input type="text" id="lname" name="lname" class="form-control">
                 </div>
               </div>
 
@@ -593,7 +694,7 @@
                 
                 <div class="col-md-12">
                   <label class="text-black" for="email">Email</label> 
-                  <input type="email" id="email" class="form-control">
+                  <input type="email" id="email" name="email" class="form-control">
                 </div>
               </div>
 
@@ -601,7 +702,7 @@
                 
                 <div class="col-md-12">
                   <label class="text-black" for="subject">Subject</label> 
-                  <input type="subject" id="subject" class="form-control">
+                  <input type="subject" id="subject" name="subject" class="form-control">
                 </div>
               </div>
 
@@ -614,7 +715,7 @@
 
               <div class="row form-group">
                 <div class="col-md-12">
-                  <input type="submit" value="Send Message" class="btn btn-primary btn-md text-white">
+                  <input type="submit" value="Send Message" name="submit11" class="btn btn-primary btn-md text-white">
                 </div>
               </div>
 
@@ -637,7 +738,7 @@
             <div class="row">
               <div class="col-md-5">
                 <h2 class="footer-heading mb-4">About Us</h2>
-                <p class="mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque facere laudantium magnam voluptatum autem. Amet aliquid nesciunt veritatis aliquam.</p>
+                <p class="mb-5">Aakash Singh’s objective is to tap into the unrealized potential and help you achieve your personal and business goals with ease and at a pace than you may have never imagined.</p>
 
                 <h2 class="footer-heading mb-4">Subscribe Newsletter</h2>
                 <form action="#" method="post" class="footer-subscribe">
@@ -711,3 +812,4 @@
     
   </body>
 </html>
+
