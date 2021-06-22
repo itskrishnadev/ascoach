@@ -1,68 +1,56 @@
-<!-- 
+
 <?php
-if(isset($_POST['submit11'])){
-  $to = "iamkrishnadev1999@gmail.com"; // this is your Email address
+if(isset($_POST['submit'])){
+  $to = "iamkrishnadev1999@gmail.com, singhaakash498@gmail.com"; // this is your Email address
   $from = $_POST['email']; // this is the sender's Email address
   $first_name = $_POST['fname'];
   $last_name = $_POST['lname'];
   $email = $_POST['email'];
   $subject = $_POST['subject'];
-  $subject2 = "Copy of your form submission";
-  $message = "Name : " . $first_name . "\n\n" ."Last Name: ". $last_name."\n\n" ."Email Address: ". $email . "\n\n" ."Message: ". $_POST['message'];
-  $message2 = "Name : " . $first_name . "\n\n" ."Last Name: ". $last_name."\n\n" ."Email Address: ". $email . "\n\n" ."Message: ". $_POST['message'];
-  $headers = "From:" . $from;
-  $headers2 = "From:" . $to;
+  $message = '<h2>Ascoach Form Request Submitted</h2>
+  <p><b>Name:</b> '.$first_name.''.$last_name.'</p>
+  <p><b>Email Address:</b> '.$email.'</p>
+  <p><b>Message:</b>'.$_POST['message'].'</p>';
+  $headers =  "From: $from" . "\r\n" .
+  "Reply-To: $email" . "\r\n" .
+  "MIME-Version: 1.0\r\n" . 
+"Content-Type: text/html; charset=iso-8859-1\r\n";
   mail($to,$subject,$message,$headers);
-  mail($from,$subject2,$message2,$headers2); // sends a copy of the message to the sender
   // echo "Mail Sent. Thank you " . $first_name . ", we will contact you shortly.";
   // You can also use header('Location: thank_you.php'); to redirect to another page.
   }
 
 
-$mysqlserverhost = "localhost";
-$database_name = "epiz_26102432_ascoach";
-$username_mysql = "epiz_26102432";
-$password_mysql = "UGpxVVpHxnWm4Vl";
-
-// ------------------------- Do not modify code nder this field -------------------------- //
-
-
-function sanitize($variable){
-  $clean_variable = strip_tags($variable);
-  $clean_variable = htmlentities($clean_variable, ENT_QUOTES, 'UTF-8');
-  return $clean_variable;
-}
-
-function connect_to_mysqli($mysqlserverhost, $username_mysql, $password_mysql, $database_name){
-  $connect = mysqli_connect($mysqlserverhost, $username_mysql, $password_mysql, $database_name);
-  if (!$connect) {
-      die("Connection failed mysql: " . mysqli_connect_error());
-  }
-  return $connect;  
-}
-
-if(isset($_POST["processform"])){
-  $connection = connect_to_mysqli($mysqlserverhost, $username_mysql, $password_mysql, $database_name);
-  $firstfield = mysqli_real_escape_string($connection, sanitize($_POST["firstfield"]));
- 
-  $sql = "INSERT INTO table_form (email_id) VALUES ('$firstfield')";
-  if (mysqli_query($connection, $sql)) {} 
-    else {}
-  mysqli_close($connection);
-}?> -->
+?> 
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>ASCoach &mdash; Website by Colorlib</title>
+    <title>ASCoach &mdash; Aakash Singh Coaching</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
+
+    <!-- seo purpose -->
+		<meta property="og:title" content="Home">
+		<meta property="og:type" content="article">
+		<meta property="og:url" content="http://ascoach.in/">
+		<meta property="og:site_name" content="Ascoach">
+		<meta property="og:description" content="Aakash Singh (Ascoach) providing to businesses, entrepreneurs or an individual looking for personal development, we can help all!
+From businesses, entrepreneurs or an individual looking for personal development, we can help all! Ascoach solves the problems which are an hindrance to">
+
+									<!-- <meta property="og:image" content="http://coachbsr.com/wp-content/uploads/2017/08/MLogo.png"> -->
+
+    <meta name="description" content="Aakash Singh (Ascoach) providing to businesses, entrepreneurs or an individual looking for personal development, we can help all!
+From businesses, entrepreneurs or an individual looking for personal development, we can help all! Ascoach solves the problems which are an hindrance to">
+    <meta name="keywords" content="ascoach, aakash singh, Aakash singh coaching, Ascoach, Krishnadev Thakur,aakash singh Bussiness, Bussiness , ascoach website,aakash singh websites,Krishnadev organisation, krishnadev website, businesses, aakash singh">
+
+    <meta name="google-site-verification" content="49z712QM08xZwT48YBp1nd5NV8Nm2g0EObdDzvePgh8" />
     
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet">
     <link rel="stylesheet" href="fonts/icomoon/style.css">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css  ">
     <link rel="stylesheet" href="css/jquery-ui.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
@@ -75,6 +63,22 @@ if(isset($_POST["processform"])){
     <link rel="stylesheet" href="css/aos.css">
 
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        @media (min-width: 768px) {
+    .img2 img{
+      width:100%;height: 83px;object-fit:cover;   
+    }
+  }
+
+  @media (max-width: 768px) {
+    .img2 img{
+      width:100%;height: 152px;object-fit:cover;   
+    }
+    .mr-5, .mx-5 {
+      margin-right: 0rem!important;
+  }
+  }
+    </style>
     
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -109,8 +113,22 @@ if(isset($_POST["processform"])){
                 <li><a href="#about-section" class="nav-link">About</a></li>
                 <li><a href="#training-section" class="nav-link">Our Training</a></li>
                 <li><a href="#services-section" class="nav-link">Services</a></li>
+                <li><a href="service.html" class="nav-link">Doorstep</a></li>
                 <li><a href="#blog-section" class="nav-link">Blog</a></li>
-                <li><a href="#tas-section" class="nav-link">TAS Support</a></li>
+					  <!-- <li><a href="it-service/index.html" class="nav-link">IT-Service</a></li> -->
+
+                <!-- <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        TAS Support
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item"  style="color:black !important;" href="service.html">Service</a>
+          <a class="dropdown-item"  style="color:black !important;" href="it-service.php">IT Service</a>
+         <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div> 
+      </li> -->
+                <!-- <li><a href="#tas-section" class="nav-link">TAS Support</a></li> -->
                 <li><a href="#contact-section" class="nav-link">Contact</a></li>
               </ul>
             </nav>
@@ -139,7 +157,7 @@ if(isset($_POST["processform"])){
       </div>
     </div>  
 
-    <div class="site-section bg-primary">
+    <!-- <div class="site-section bg-primary">
       <div class="container">
         <div class="row">
           <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
@@ -163,21 +181,25 @@ if(isset($_POST["processform"])){
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <section class="site-section" id="about-section">
+    <section style="padding: 7em 0 0 !important;" class="site-section" id="about-section">
       <div class="container">
         <div class="row mb-5">
           
           <div class="col-lg-5 ml-auto mb-5 order-md-2" data-aos="fade">
-            <img src="images/about_1.jpg" alt="Image" class="img-fluid rounded">
+            <img src="images/about_2.jpg" alt="Image" class="img-fluid rounded">
           </div>
           <div class="col-lg-6 order-md-1" data-aos="fade">
             <h2 class="section-title mb-3">Welcome to ASCoach</h2>
-            <p class="lead">I am a Financing Coach. While I do some loan brokering, my specialty is in matching my clients with a financing resource.</p>
-            <p> making a personal recommendation for them to that resource, and then coaching my clients on how to make a presentation which will effectively sell their request.</p>
-            <p class="mb-4">The resulting partnership is a successful—and usually long-term—connection between my clients’ particular financing needs and the interests of the financing resource</p>
-            <p><img src="images/signature.jpg" alt="Image" class="img-fluid w-25"></p>
+            <p style="font-size: 1.03em;" class="lead">We providing to businesses, entrepreneurs or an individual looking for personal development, we can help all!
+              We respect, trust & care for each other. Our greatest strength is our team spirit & that will remain because a core of us come through the leagues together.
+            </p>
+            <p  style="font-size: 1.03em;" class="lead"> ASCoach solves the problems which are an hindrance to their business or self growth by offering his proven strategic programs personally curated for his clients. We providing quality services at your doorstep.</p>
+            <!-- <p class="mb-4">The resulting partnership is a successful—and usually long-term—connection between my clients’ particular financing needs and the interests of the financing resource</p> -->
+
+             <!-- ASCoach solves the problems which are an hindrance to their business or self growth by offering his proven strategic programs personally curated for his clients. -->
+             <!-- <p><img src="images/signature.jpg" alt="Image" class="img-fluid w-25"></p> -->
           </div>
           
         </div>
@@ -198,34 +220,46 @@ if(isset($_POST["processform"])){
             <ul class="list-unstyled training">
               <li class="mb-5 d-block d-lg-flex">
                 <div class="mr-5 mb-4 img">
-                  <a href="training-single.html"><img src="images/img_1.jpg" alt="Image" class="img-fluid"></a>
+                  <a href="training-single.html">
+                  <div class="img2">
+                  <img src="images/ascoach 03.jpg" alt="Image" class="img-fluid">
+                  </div>
+                  </a>
                 </div>
                 <div>
-                  <h2 class="h4"><a href="training-single.html" class="text-black">How to deal your business?</a></h2>
-                  <span class="text-muted d-block mb-4">Finance</span>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores .</p>
+                  <h2 class="h4"><a href="training-single.html" class="text-black">How to develop leadership skills?</a></h2>
+                  <span class="text-muted d-block mb-4">Leadership Skill</span>
+                  <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores .</p> -->
                 </div>
               </li>
 
               <li class="mb-5 d-block d-lg-flex">
                 <div class="mr-5 mb-4 img">
-                  <a href="training-single.html"><img src="images/img_2.jpg" alt="Image" class="img-fluid"></a>
+                  <a href="training-single.html">
+                  <div class="img2">
+                  <img src="images/ascoach 04.jpg" alt="Image" class="img-fluid">
+                  </div>
+                  </a>
                 </div>
                 <div>
-                  <h2 class="h4"><a href="training-single.html" class="text-black">How to stay progressive in knowledge</a></h2>
-                  <span class="text-muted d-block mb-4">Social Life</span>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores .</p>
+                  <h2 class="h4"><a href="training-single.html" class="text-black">Team work and have best productiity</a></h2>
+                  <span class="text-muted d-block mb-4">Team Building</span>
+                  <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores .</p> -->
                 </div>
               </li>
 
               <li class="mb-5 d-block d-lg-flex">
                 <div class="mr-5 mb-4 img">
-                  <a href="training-single.html"><img src="images/img_3.jpg" alt="Image" class="img-fluid"></a>
+                  <a href="training-single.html">
+                  <div class="img2">
+                  <img src="images/ascoach 01.jpg" alt="Image" class="img-fluid">
+                  </div>
+                  </a>
                 </div>
                 <div>
-                  <h2 class="h4"><a href="training-single.html" class="text-black">How To Invest In Investing Company</a></h2>
-                  <span class="text-muted d-block mb-4">Family Issue</span>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores .</p>
+                  <h2 class="h4"><a href="training-single.html" class="text-black">How To manage your Stress?</a></h2>
+                  <span class="text-muted d-block mb-4">Stress Management   </span>
+                  <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores .</p> -->
                 </div>
               </li>
 
@@ -235,37 +269,80 @@ if(isset($_POST["processform"])){
             <ul class="list-unstyled training">
               <li class="mb-5 d-block d-lg-flex">
                 <div class="mr-5 mb-4 img">
-                  <a href="training-single.html"><img src="images/img_1.jpg" alt="Image" class="img-fluid"></a>
+                  <a href="training-single.html">
+                  <div class="img2">
+                  <img src="images/ascoach 05.jpg" alt="Image" class="img-fluid">
+                  </div>
+                  </a>
                 </div>
                 <div>
-                  <h2 class="h4"><a href="training-single.html" class="text-black">How to deal your business?</a></h2>
-                  <span class="text-muted d-block mb-4">Family Issue</span>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores .</p>
+                  <h2 class="h4"><a href="training-single.html" class="text-black">How to develop your skills</a></h2>
+                  <span class="text-muted d-block mb-4">PROFESSIONAL COURSES </span>
+                  <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores .</p> -->
                 </div>
               </li>
+              <!-- <li class="mb-5 d-block d-lg-flex">
+                <div class="mr-5 mb-4 img">
+                  <a href="training-single.html">
+                  <div class="img2">
+                  <img src="images/ascoach 02.jpg" alt="Image" class="img-fluid">
+                  </div>
+                  </a>
+                </div>
+                <div>
+                  <h2 class="h4"><a href="training-single.html" class="text-black">How to deal your business Conflict?</a></h2>
+                  <span class="text-muted d-block mb-4">Conflict Management</span>
+                </div>
+              </li> -->
 
               <li class="mb-5 d-block d-lg-flex">
                 <div class="mr-5 mb-4 img">
-                  <a href="training-single.html"><img src="images/img_2.jpg" alt="Image" class="img-fluid"></a>
+                  <a href="training-single.html">
+                  <div class="img2">
+                  <img src="images/ascoach06 behaviorial training.png" alt="Image" class="img-fluid">
+                  </div>
+                  </a>
                 </div>
                 <div>
-                  <h2 class="h4"><a href="training-single.html" class="text-black">How to stay progressive in knowledge</a></h2>
-                  <span class="text-muted d-block mb-4">Finance</span>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores .</p>
+                  <h2 class="h4"><a href="training-single.html" class="text-black">How to stay progressive in knowledge with training?</a></h2>
+                  <span class="text-muted d-block mb-4">Behavioural Training </span>
+                  <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores .</p> -->
                 </div>
               </li>
 
-              <li class="mb-5 d-block d-lg-flex">
+              <!-- <li class="mb-5 d-block d-lg-flex">
                 <div class="mr-5 mb-4 img">
-                  <a href="training-single.html"><img src="images/img_3.jpg" alt="Image" class="img-fluid"></a>
+                  <a href="training-single.html">
+                  <div class="img2">
+                  <img src="images/ascoach 05.jpg" alt="Image" class="img-fluid">
+                  </div>
+                  </a>
                 </div>
                 <div>
-                  <h2 class="h4"><a href="training-single.html" class="text-black">How To Invest In Investing Company</a></h2>
-                  <span class="text-muted d-block mb-4">Job Issue</span>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores .</p>
+                  <h2 class="h4"><a href="training-single.html" class="text-black">How To be a good salesman</a></h2>
+                  <span class="text-muted d-block mb-4">Sales Training</span>
+                  
                 </div>
-              </li>
+              </li> -->
 
+              
+             
+            </ul>
+            <ul class="list-unstyled training">
+              <li class="mb-5 d-block d-lg-flex">
+                  <div class="mr-5 mb-4 img">
+                    <a href="training-single.html">
+                    <div class="img2">
+                    <img style="object-fit: fill;" src="images/personaliy developmemt.jpg" alt="Image" class="img-fluid">
+                    </div>
+                    </a>
+                  </div>
+                  <div>
+                    <h2 class="h4"><a href="training-single.html" class="text-black">How To grow yourself</a></h2>
+                    <span class="text-muted d-block mb-4">PERSONALITY DEVELOPMENT</span>
+                    <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores .</p> -->
+                  </div>
+                </li>
             </ul>
           </div>
         </div>
@@ -275,7 +352,7 @@ if(isset($_POST["processform"])){
     
     
     
-    <section class="site-section border-bottom" id="team-section">
+    <!-- <section class="site-section border-bottom" id="team-section">
       <div class="container">
         <div class="row mb-5">
           <div class="col-lg-7 text-left">
@@ -286,7 +363,7 @@ if(isset($_POST["processform"])){
         <div class="row">
           
 
-          <div class="col-md-6 col-lg-3 mb-4">
+          <div class="col-md-6 col-lg-4 mb-4">
             <div class="team-member">
               <figure>
                 <ul class="social">
@@ -295,17 +372,17 @@ if(isset($_POST["processform"])){
                   <li><a href="#"><span class="icon-linkedin"></span></a></li>
                   <li><a href="#"><span class="icon-instagram"></span></a></li>
                 </ul>
-                <div class="img-card2">  <img src="images/Aaksh Singh.jpg" alt="Aaksh Singh" class="img-fluid"></div>
+                <div class="img-card2">  <img src="images/akash.jpeg" alt="Aaksh Singh" class="img-fluid"></div>
               
               </figure>
               <div class="p-3">
                 <h3>Aakash Singh</h3>
-                <span class="position">Expert in Motivational</span>
+                <span class="position">Expert Business Coach</span>
               </div>
             </div>
           </div>
 
-          <div class="col-md-6 col-lg-3 mb-4">
+          <div class="col-md-6 col-lg-4 mb-4">
             <div class="team-member">
               <figure>
                 <ul class="social">
@@ -315,17 +392,17 @@ if(isset($_POST["processform"])){
                   <li><a href="#"><span class="icon-instagram"></span></a></li>
                 </ul>
                 <div class="img-card2">
-                <img src="images/person_6.jpg" alt="Image" class="img-fluid">
+                <img style="object-fit: fill;" src="images/imageperson2.jpeg" alt="Image" class="img-fluid">
                </div>
               </figure>
               <div class="p-3">
-                <h3>Dave Simpson</h3>
-                <span class="position">Expert in Financing Issue</span>
+                <h3>Prashant Chaudhari</h3>
+                <span class="position">Expert Consultant</span>
               </div>
             </div>
           </div>
 
-          <div class="col-md-6 col-lg-3 mb-4">
+          <div class="col-md-6 col-lg-4 mb-4">
             <div class="team-member">
               <figure>
                 <ul class="social">
@@ -335,40 +412,22 @@ if(isset($_POST["processform"])){
                   <li><a href="#"><span class="icon-instagram"></span></a></li>
                 </ul>
                 <div class="img-card2">
-                <img src="images/person_7.jpg" alt="Image" class="img-fluid">
+                <img src="images/krishna.jpeg"   alt="Krishnadev Thakur" class="img-fluid">
                </div>
               </figure>
               <div class="p-3">
-                <h3>Ben Thompson</h3>
-                <span class="position">Expert in Social Life</span>
+                <h3>Krishnadev Thakur</h3>
+                <span class="position">Expert IT Service</span>
               </div>
             </div>
           </div>
 
-          <div class="col-md-6 col-lg-3 mb-4">
-            <div class="team-member">
-              <figure>
-                <ul class="social">
-                  <li><a href="#"><span class="icon-facebook"></span></a></li>
-                  <li><a href="#"><span class="icon-twitter"></span></a></li>
-                  <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                  <li><a href="#"><span class="icon-instagram"></span></a></li>
-                </ul>
-                <div class="img-card2">
-                <img src="images/person_8.jpg" alt="Image" class="img-fluid">
-               </div>
-              </figure>
-              <div class="p-3">
-                <h3>Kyla Stewart</h3>
-                <span class="position">Expert in Social Life</span>
-              </div>
-            </div>
-          </div>
+       
 
           
         </div>
       </div>
-    </section>
+    </section> -->
 
 
     <section class="site-section">
@@ -395,21 +454,21 @@ if(isset($_POST["processform"])){
                 <p class="lead">What is good social life?</p>
                 <p>Having strong relationships and love in your life Being able to manage your money Being in good health, with enough energy to get things done each day (physical well-being) Feeling engaged with where you live.</p>
 
-                <p><a href="#" class="btn btn-primary mr-2 mb-2">Learn More</a></p>
+                <!-- <p><a href="#" class="btn btn-primary mr-2 mb-2">Learn More</a></p> -->
               </div>
               <div>
                 <h2 class="section-title mb-3">Money &amp; Finance</h2>
                 <p class="lead">Importance of Money & Finance</p>
                 <p>Finance is the soul and blood of any business and no firm can survive without finance. It concerns itself with the management of monetary affairs of the firm—how money can be raised on the best terms available and how the procured money can be devoted to the best uses.</p>
 
-                <p><a href="#" class="btn btn-primary mr-2 mb-2">Learn More</a></p>
+                <!-- <p><a href="#" class="btn btn-primary mr-2 mb-2">Learn More</a></p> -->
               </div>
               <div>
                 <h2 class="section-title mb-3">Motivation</h2>
                 <p class="lead">Motivation is always internal to the person.</p>
                 <p>Human behaviour is caused by the various needs. A worker works in a factory because he needs money. Similarly, a thirsty man feels the need of water to conquer his thirst. The feeling of needs is a continuous process and the satisfaction of one need leads to the creation of a new one.</p>
 
-                <p><a href="#" class="btn btn-primary mr-2 mb-2">Learn More</a></p>
+                <!-- <p><a href="#" class="btn btn-primary mr-2 mb-2">Learn More</a></p> -->
               </div>
               
             </div>
@@ -421,7 +480,7 @@ if(isset($_POST["processform"])){
 
     
 
-    <section class="site-section border-bottom bg-light" id="services-section">
+    <!-- <section class="site-section border-bottom bg-light" id="services-section">
       <div class="container">
         <div class="row mb-5">
           <div class="col-12 text-center">
@@ -434,8 +493,7 @@ if(isset($_POST["processform"])){
               <div class="unit-4-icon mr-4"><span class="text-primary flaticon-career"></span></div>
               <div>
                 <h3>Business Consulting</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
-                <p><a href="#">Learn More</a></p>
+                <p>We offer tailored consulting services for a variety of businesses and company situations.</p>
               </div>
             </div>
           </div>
@@ -443,9 +501,9 @@ if(isset($_POST["processform"])){
             <div class="unit-4 d-flex">
               <div class="unit-4-icon mr-4"><span class="text-primary flaticon-bill"></span></div>
               <div>
-                <h3>TAX  CONSULTING</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
-                <p><a href="#">Learn More</a></p>
+                <h3>Tax  Consulting</h3>
+                <p>We will help you strategize to minimize income taxes and tax planning for closely held businesses.</p>
+                
               </div>
             </div>
           </div>
@@ -453,9 +511,9 @@ if(isset($_POST["processform"])){
             <div class="unit-4 d-flex">
               <div class="unit-4-icon mr-4"><span class="text-primary flaticon-customer-service"></span></div>
               <div>
-                <h3>IT SERVICE</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
-                <p><a href="#">Learn More</a></p>
+                <h3>IT Service</h3>
+                <p>Strategic management of the IT directly influences your success in business.</p>
+               
               </div>
             </div>
           </div>
@@ -466,8 +524,8 @@ if(isset($_POST["processform"])){
               <div class="unit-4-icon mr-4"><span class="text-primary flaticon-plan"></span></div>
               <div>
                 <h3>Insurance Consulting</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
-                <p><a href="#">Learn More</a></p>
+                <p>We offer a wide range of expertise to help our clients adapt to a changing insurance market.</p>
+                
               </div>
             </div>
           </div>
@@ -476,8 +534,8 @@ if(isset($_POST["processform"])){
               <div class="unit-4-icon mr-4"><span class="text-primary flaticon-growth"></span></div>
               <div>
                 <h3>Financial Investment</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
-                <p><a href="#">Learn More</a></p>
+                <p>Finance Investment is supporting your finance department in particularly challenging projects.</p>
+                
               </div>
             </div>
           </div>
@@ -490,12 +548,35 @@ if(isset($_POST["processform"])){
                style="margin: 11px 0 -2% !important;" />
               </div>
               <div>
-                <h3>MORTGAGE LOAN</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
-                <p><a href="#">Learn More</a></p>
+                <h3>Mortgage Loan</h3>
+                <p>Applying for a Mortgage loan has never been easier. Your new dreams starts here!.</p>
+               
               </div>
             </div>
           </div>
+
+        </div>
+      </div>
+    </section> -->
+    <section class="site-section border-bottom bg-light" id="services-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-12 text-center">
+            <h2 class="section-title mb-3">Home Tutor</h2>
+            <h4 style="color: #3a4971;" class="">Grow your child with ASCoach</h4>
+          </div>
+        </div>
+        <div class="row align-items-stretch">
+    <p class="lead">Now-a-days, Our day-to-day life is very busy, we don’t have time to focus our
+child. ASCoach launched home tutor service in Mira-bhayandar. In this, we
+going to focus on education + personality development. Because During the
+years of early childhood, a child's mind is vulnerable and easily influenced.
+Children at this age look to others for guidance and self-affirmation. An
+educator's role is to aid in the development of his or her students' personalities.
+We as educators all know that our early childhood students seek our approval.
+They look up to us and take our opinion as truth. The expectations that we
+project onto our students affect their self-esteem and confidence. 
+    </p>
 
         </div>
       </div>
@@ -582,25 +663,25 @@ if(isset($_POST["processform"])){
         </div>
 
         <div class="row">
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+          <div class="col-md-6 col-lg-6 mb-6 mb-lg-6">
             <div class="h-entry">
               <a href="blog-single.html"><img src="images/img_1.jpg" alt="Image" class="img-fluid"></a>
-              <h2 class="font-size-regular"><a href="blog-single.html">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h2>
-              <div class="meta mb-4">Ham Brook <span class="mx-2">&bullet;</span> Jan 18, 2019<span class="mx-2">&bullet;</span> <a href="#">News</a></div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eligendi nobis ea maiores sapiente veritatis reprehenderit suscipit quaerat rerum voluptatibus a eius.</p>
-              <p><a href="#">Continue Reading...</a></p>
+              <h2 class="font-size-regular"><a href="blog-single.html">"Success is not final; failure is not fatal: it is the courage to continue that count."</a></h2>
+              <div class="meta mb-4">Aakash Singh <span class="mx-2">&bullet;</span> June 18, 2020<span class="mx-2">&bullet;</span> <a href="#">News</a></div>
+              <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eligendi nobis ea maiores sapiente veritatis reprehenderit suscipit quaerat rerum voluptatibus a eius.</p>
+              <p><a href="#">Continue Reading...</a></p> -->
             </div> 
           </div>
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+          <div class="col-md-6 col-lg-6 mb-6 mb-lg-6">
             <div class="h-entry">
               <a href="blog-single.html"><img src="images/img_2.jpg" alt="Image" class="img-fluid"></a>
-              <h2 class="font-size-regular"><a href="blog-single.html">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h2>
-              <div class="meta mb-4">James Phelps <span class="mx-2">&bullet;</span> Jan 18, 2019<span class="mx-2">&bullet;</span> <a href="#">News</a></div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eligendi nobis ea maiores sapiente veritatis reprehenderit suscipit quaerat rerum voluptatibus a eius.</p>
-              <p><a href="#">Continue Reading...</a></p>
+              <h2 class="font-size-regular"><a href="blog-single.html">"The harder you work for something, the greater you'll feel when you achieve it."</a></h2>
+              <div class="meta mb-4">Aakash Singh <span class="mx-2">&bullet;</span> June 10, 2020<span class="mx-2">&bullet;</span> <a href="#">News</a></div>
+              <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eligendi nobis ea maiores sapiente veritatis reprehenderit suscipit quaerat rerum voluptatibus a eius.</p>
+              <p><a href="#">Continue Reading...</a></p> -->
             </div>
           </div>
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+          <!-- <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
             <div class="h-entry">
               <a href="blog-single.html"><img src="images/img_1.jpg" alt="Image" class="img-fluid"></a>
               <h2 class="font-size-regular"><a href="blog-single.html">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h2>
@@ -608,7 +689,7 @@ if(isset($_POST["processform"])){
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eligendi nobis ea maiores sapiente veritatis reprehenderit suscipit quaerat rerum voluptatibus a eius.</p>
               <p><a href="#">Continue Reading...</a></p>
             </div> 
-          </div>
+          </div> -->
           
         </div>
       </div>
@@ -616,7 +697,7 @@ if(isset($_POST["processform"])){
 
 
 
-    <section class="site-section bg-light" id="tas-section">
+    <!-- <section class="site-section bg-light" id="tas-section">
       <div class="container">
         <div class="row mb-5">
           <div class="col-12 text-center">
@@ -631,18 +712,12 @@ if(isset($_POST["processform"])){
 
           <div class="col-md-6 col-lg-6 mb-6 mb-lg-6">
             <img src="images/TAS2.png" alt="Image" class="img-fluid">
-            <!-- <div class="h-entry">
-              <a href="blog-single.html"><img src="images/img_1.jpg" alt="Image" class="img-fluid"></a>
-              <h2 class="font-size-regular"><a href="blog-single.html">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h2>
-              <div class="meta mb-4">Ham Brook <span class="mx-2">&bullet;</span> Jan 18, 2019<span class="mx-2">&bullet;</span> <a href="#">News</a></div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eligendi nobis ea maiores sapiente veritatis reprehenderit suscipit quaerat rerum voluptatibus a eius.</p>
-              <p><a href="#">Continue Reading...</a></p>
-            </div>  -->
+      
           </div>
 
         </div>
       </div>
-    </section>
+    </section> -->
 
    
 
@@ -666,7 +741,7 @@ if(isset($_POST["processform"])){
           </div>
           <div class="col-md-4">
             <p class="mb-0 font-weight-bold">Email Address</p>
-            <p class="mb-0"><a href="#">singhaakash498@gmail.com</a></p>
+            <p class="mb-0"><a href="#">admin@ascoach.in</a></p>
           </div>
         </div>
         <div class="row">
@@ -712,11 +787,9 @@ if(isset($_POST["processform"])){
 
               <div class="row form-group">
                 <div class="col-md-12">
-                  <input type="submit" value="Send Message" name="submit11" class="btn btn-primary btn-md text-white">
+                  <input type="submit" value="Send Message" name="submit" class="btn btn-primary btn-md text-white">
                 </div>
-              </div>
-
-  
+              </div>  
             </form>
 
             
@@ -769,8 +842,8 @@ if(isset($_POST["processform"])){
           <div class="col-md-3">
             <div class="mb-5">
               <img src="images/img_1.jpg" alt="" class="img-fluid mb-4">
-              <h2 class="footer-heading mb-4">Some Paragraph</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, laudantium nisi quo, sit neque quisquam.</p>
+              <h2 class="footer-heading mb-4">Some Aakash Singh quotes</h2>
+              <p>Great people were not born great, instead they became great by making a decision that changed their entire lives</p>
             </div>
             
           </div>
@@ -780,8 +853,7 @@ if(isset($_POST["processform"])){
             <div class="border-top pt-5">
             <p>
         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
-        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        Copyright  &copy; Ascoach <script>document.write(new Date().getFullYear());</script> All rights reserved  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
       </p>
             </div>
           </div>
@@ -806,6 +878,7 @@ if(isset($_POST["processform"])){
 
   
   <script src="js/main.js"></script>
+  <script src="js/removeBanner.js"></script>
     
   </body>
 </html>
